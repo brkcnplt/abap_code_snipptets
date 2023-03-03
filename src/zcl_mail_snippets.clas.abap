@@ -35,8 +35,7 @@ CLASS ZCL_MAIL_SNIPPETS IMPLEMENTATION.
                          obj_descr = iv_mail_desc ).
 
 
-    mail_content = iv_text.
-    APPEND mail_content TO mail_content_table.
+    APPEND VALUE #( line = iv_text ) TO mail_content_table.
 
 
     receivers = VALUE #( FOR ls_receivers IN it_receivers
