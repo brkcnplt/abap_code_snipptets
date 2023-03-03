@@ -21,6 +21,17 @@ public section.
       value(IV_DATE) type SY-DATUM default SY-DATUM
     returning
       value(EV_CONVERTED_DATE) type STRING .
+  methods CONVERT_TIMESTAMP_TO_DATE
+    importing
+      value(IV_TIMESTAMP) type TIMESTAMP
+    exporting
+      value(EV_DATE) type DATUM
+      value(EV_TIME) type UZEIT .
+  methods CONVERT_DATE_TO_TIMESTAMP
+    importing
+      value(IV_DATE) type DATUM default SY-DATUM
+      value(IV_TIME) type UZEIT default SY-UZEIT
+      value(EV_TIMESTAMP) type TIMESTAMP optional .
   methods DAY_MONTH_YEAR_DIFF_BT_TWO_DAT
     importing
       value(IV_DATE_FROM) type VTBBEWE-DBERVON
@@ -50,8 +61,21 @@ CLASS ZCL_DATE_SNIPPETS IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD convert_date_to_timestamp.
+    CONVERT DATE iv_date TIME iv_time
+     INTO TIME STAMP ev_timestamp
+     TIME ZONE sy-zonlo.
+  ENDMETHOD.
+
+
   METHOD convert_date_to_user.
     ev_converted_date = |{ iv_date DATE = USER }|.
+  ENDMETHOD.
+
+
+  METHOD convert_timestamp_to_date.
+    CONVERT TIME STAMP iv_timestamp TIME ZONE sy-zonlo INTO
+              DATE ev_date TIME ev_time.
   ENDMETHOD.
 
 
