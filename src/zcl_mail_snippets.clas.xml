@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_MAIL_SNIPPETS</CLSNAME>
+    <LANGU>T</LANGU>
+    <DESCRIPT>Sending Mail Snippets</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CMPNAME>SEND_SIMPLE_MAIL</CMPNAME>
+     <LANGU>T</LANGU>
+     <DESCRIPT>Sening Simple Mail</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND_SIMPLE_MAIL</CMPNAME>
+     <SCONAME>IT_RECEIVERS</SCONAME>
+     <LANGU>T</LANGU>
+     <DESCRIPT>Simple Mail Receiver Table Type</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND_SIMPLE_MAIL</CMPNAME>
+     <SCONAME>IV_MAIL_DESC</SCONAME>
+     <LANGU>T</LANGU>
+     <DESCRIPT>Kısa içerik tanımı</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND_SIMPLE_MAIL</CMPNAME>
+     <SCONAME>IV_MAIL_HEADER</SCONAME>
+     <LANGU>T</LANGU>
+     <DESCRIPT>Dokümanın, klasörün ya da dağıtım listesinin adı</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>
