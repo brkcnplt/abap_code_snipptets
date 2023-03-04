@@ -12,6 +12,11 @@ public section.
       value(IV_TEXT) type STRING optional
       value(IV_MAIL_HEADER) type SO_OBJ_NAM optional
       value(IV_MAIL_DESC) type SO_OBJ_DES optional .
+  methods REGEX_TO_VALIDATE_MAIL
+    importing
+      value(IV_MAIL_ADDRESS) type AD_SMTPADR optional
+    returning
+      value(EV_VALID) type FLAG .
 protected section.
 private section.
 ENDCLASS.
@@ -19,6 +24,58 @@ ENDCLASS.
 
 
 CLASS ZCL_MAIL_SNIPPETS IMPLEMENTATION.
+
+
+  METHOD regex_to_validate_mail.
+
+********************************************************************************
+* GitHub Repository : https://www.github.com/brkcnplt
+* Linkedin          : https://www.linkedin.com/in/berkcanpolat/
+********************************************************************************
+* Berk Can Polat - 04.03.2023 17:18:59
+    " RegEx Pattern Explaination
+*    \w+(\.\w+)*@(\w+\.)+(\w{2,4})
+*The first part, in front of @, will accept any alphanumeric character or
+*    characters with or without (.) dot. This part (\.\w+)
+*    validates if there is a dot it must be followed by a character.
+
+*\w+(\.\w+)*@(\w+\.)+(\w{2,4})
+*Part following the @, allows the flexibility to have any name with following
+*a (.) dot. This part (\w+\.) makes sure that there is at least one domain
+* before the end part. If there are multiple, it would check for (.)
+*dot after each part of the domain.
+
+*\w+(\.\w+)*@(\w+\.)+(\w{2,4})
+*The last part ensures that the email has at least
+* 2 and maximum 4 characters after the last dot.
+********************************************************************************
+
+    DATA: regex              TYPE REF TO cl_abap_regex,       " Regex Object
+          matcher            TYPE REF TO cl_abap_matcher,     " Matcher Object
+          match              TYPE c LENGTH 1,                 " Match ?
+          mail_to_check(100).                      " Email ID to check
+
+
+    mail_to_check = iv_mail_address.
+
+    ev_valid = abap_true.
+
+* Instntiate Regex
+    CREATE OBJECT regex
+      EXPORTING
+        pattern     = '\w+(\.\w+)*@(\w+\.)+(\w{2,4})'
+        ignore_case = abap_true.
+
+* Create the Matcher
+    matcher = regex->create_matcher( text = mail_to_check ).
+
+* Match not found, invalid
+    IF matcher->match( ) IS INITIAL.
+      ev_valid = abap_false.  "Email not valid
+      EXIT.
+    ENDIF.
+
+  ENDMETHOD.
 
 
   METHOD send_simple_mail.
