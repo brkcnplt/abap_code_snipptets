@@ -1,2 +1,2 @@
 # abap_code_snipptets
-Useful Code Snippets
+Useful Code Snippets $CODESNIPPETS
